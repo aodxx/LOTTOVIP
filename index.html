@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./phase0/styles.css">
-  <link rel="stylesheet" href="./dashboard.css">
+  <link rel="stylesheet" href="./dashboard.css">\n  <link rel="stylesheet" href="./phase5.css">
 </head>
 <body>
   <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
@@ -36,7 +36,7 @@
       <section class="dashboard-section"><div class="section-heading"><div><p class="eyebrow">Lottery simulator</p><h3>เลือกประเภทหวยจำลอง</h3></div><span class="live-dot">LIVE</span></div><nav class="category-tabs" id="category-tabs" aria-label="หมวดหวย"></nav><div class="round-list" id="round-list"><p class="muted">กำลังโหลดรายการงวด...</p></div></section>
       <section class="dashboard-section"><div class="section-heading"><div><p class="eyebrow">My entries</p><h3>โพยล่าสุด</h3></div><button class="text-button" id="refresh-entries" type="button">รีเฟรช</button></div><div class="recent-entries" id="recent-entries"><p class="muted">กำลังโหลดโพย...</p></div></section>
       <section class="dashboard-section"><div class="section-heading"><div><p class="eyebrow">Wallet history</p><h3>ประวัติยอดล่าสุด</h3></div></div><div class="ledger-list" id="ledger-list"><p class="muted">กำลังโหลดประวัติ...</p></div></section>
-      <p class="dashboard-status muted centered" id="dashboard-status" aria-live="polite"></p>
+      <section class="dashboard-section"><div class="section-heading"><div><p class="eyebrow">Simulation results</p><h3>ผลรางวัลจำลองล่าสุด</h3></div></div><div class="result-list" id="recent-results"><p class="muted">กำลังโหลดผล...</p></div><p class="dashboard-status muted centered" id="results-status" aria-live="polite"></p></section>\n      <p class="dashboard-status muted centered" id="dashboard-status" aria-live="polite"></p>
     </section>
     <section class="screen entry-screen" id="entry-screen">
       <header class="app-header"><button class="text-button" id="entry-back" type="button">← กลับ</button><div class="grow"><p class="eyebrow">Draft entry</p><h2 id="entry-round-title">เลือกตัวเลข</h2></div></header>
@@ -58,6 +58,6 @@
     </section>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
-  <script src="./config.js"></script><script src="./auth.js"></script><script src="./entry-builder.js"></script><script src="./auth-page.js"></script>
+  <script src="./config.js"></script><script src="./auth.js"></script><script src="./entry-builder.js"></script><script src="./auth-page.js"></script><script src="./phase5.js"></script>
 </body>
 </html>
