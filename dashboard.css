@@ -22,7 +22,15 @@
 .positive-text { color:#8ce5b6; }.negative-text,.error-text { color:#ff9cac!important; }
 .empty-state { padding:18px; border:1px dashed var(--line); border-radius:14px; text-align:center; font-size:11px; }
 .dashboard-status,.entry-status { margin:18px 0 0; font-size:11px; }
-.round-card { cursor:pointer; }
+.remember-row { display:flex; align-items:center; gap:10px; margin-top:15px; cursor:pointer; }
+.remember-row input { flex:0 0 20px; width:20px; height:20px; margin:0; accent-color:var(--gold); }
+.remember-help { margin:7px 0 0 30px; font-size:10px; line-height:1.5; }
+.round-card { width:100%; color:inherit; cursor:pointer; text-align:left; font:inherit; -webkit-tap-highlight-color:rgba(214,168,75,.18); touch-action:manipulation; }
+.round-card:focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+.round-card:disabled { cursor:wait; opacity:.65; }
+.round-copy strong,.round-copy small,.round-copy time { display:block; }
+.round-copy strong { overflow:hidden; font-size:14px; text-overflow:ellipsis; white-space:nowrap; }
+.round-copy small { margin:3px 0 7px; color:var(--muted); font-size:10px; }
 .round-card .entry-action { margin-left:auto; }
 .entry-card form { display:grid; gap:13px; }
 .entry-card select { width:100%; }
@@ -31,5 +39,4 @@
 .entry-item div { flex:1; }
 .entry-item b { color:var(--gold-soft); font-size:22px; letter-spacing:.1em; }
 .entry-item strong { font-size:13px; }
-.entry-item button { border:0; color:#ff9cac; background:transparent; font:inherit; cursor:pointer; }
-
+.entry-item button { border:0; color:#ff9cac; background:transparent; font:inherit; cursor:pointer; touch-action:manipulation; }

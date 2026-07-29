@@ -19,9 +19,11 @@
       <div class="brand-lockup"><div class="brand-mark" aria-hidden="true">LV</div><p class="eyebrow">Member access</p><h1>LOTTO<span>VIP</span></h1><p class="muted">บัญชีสมาชิกหลักสำหรับเข้าใช้งานระบบ</p></div>
       <form class="login-card glass-card" id="auth-form">
         <label>ชื่อที่ใช้แสดง<input id="display-name" autocomplete="name" placeholder="ชื่อของคุณ"></label>
-        <label>อีเมล<input id="email" type="email" autocomplete="email" required placeholder="name@example.com"></label>
+        <label>อีเมล<input id="email" type="email" autocomplete="username" required placeholder="name@example.com"></label>
         <label>รหัสผ่าน<input id="password" type="password" autocomplete="current-password" minlength="6" required></label>
-        <button class="primary-button" type="submit">เข้าสู่ระบบ</button>
+        <label class="remember-row"><input id="remember-email" type="checkbox" checked><span>จดจำอีเมลบนอุปกรณ์นี้</span></label>
+        <p class="remember-help muted">เมื่อเข้าสู่ระบบสำเร็จ ระบบจะคงสถานะไว้จนกว่าคุณจะกดออกจากระบบ</p>
+        <button class="primary-button" id="sign-in" type="submit">เข้าสู่ระบบ</button>
         <button class="secondary-button" id="sign-up" type="button">สมัครสมาชิก</button>
         <p class="muted centered" id="auth-status" aria-live="polite">พร้อมเข้าสู่ระบบ</p>
       </form>
@@ -41,7 +43,7 @@
           <label>ประเภท<select id="entry-type" required></select></label>
           <label>ตัวเลข<input id="entry-number" inputmode="numeric" pattern="[0-9]*" autocomplete="off" required></label>
           <label>ยอดต่อรายการ<input id="entry-amount" type="number" inputmode="decimal" step="1" value="10" required></label>
-          <button class="primary-button" type="submit">เพิ่มในแบบร่าง</button>
+          <button class="primary-button" id="add-entry" type="submit">เพิ่มในแบบร่าง</button>
         </form>
         <p class="muted centered entry-status" id="entry-status" aria-live="polite"></p>
       </section>
@@ -54,4 +56,3 @@
   <script src="./config.js"></script><script src="./auth.js"></script><script src="./entry-builder.js"></script><script src="./auth-page.js"></script>
 </body>
 </html>
-
