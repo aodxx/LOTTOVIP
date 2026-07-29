@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#15171c">
+  <meta name="description" content="NumberLab VIP — mobile lottery operations simulator prototype">
+  <title>NumberLab VIP — Simulation Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <main class="app-shell" id="app">
+    <section class="screen login-screen active" data-screen="login">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true">NL</div>
+        <p class="eyebrow">Lottery Experience Simulator</p>
+        <h1>NumberLab <span>VIP</span></h1>
+        <p class="muted">พื้นที่ทดลอง Workflow, Ledger และ UX ด้วยเครดิตจำลองเท่านั้น</p>
+      </div>
+
+      <form class="login-card glass-card" id="login-form">
+        <div class="sandbox-badge">SIMULATION ONLY</div>
+        <label>ชื่อผู้ใช้
+          <input id="username" autocomplete="username" value="demo.user" required>
+        </label>
+        <label>รหัสผ่าน
+          <input type="password" autocomplete="current-password" value="prototype" required>
+        </label>
+        <button class="primary-button" type="submit">เข้าสู่ระบบทดลอง</button>
+        <button class="text-button" type="button">ลืมรหัสผ่าน?</button>
+      </form>
+      <p class="legal-note">เครดิตในระบบไม่มีมูลค่าเงินสด และไม่สามารถถอนหรือแลกเปลี่ยนได้</p>
+    </section>
+
+    <section class="screen" data-screen="dashboard">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">สวัสดี, Demo User</p>
+          <h2>ภาพรวมวันนี้</h2>
+        </div>
+        <button class="avatar" aria-label="บัญชีผู้ใช้">DU</button>
+      </header>
+
+      <article class="wallet-card">
+        <div>
+          <p>เครดิตจำลองคงเหลือ</p>
+          <strong>฿ 10,000.00</strong>
+        </div>
+        <span class="sandbox-badge">SANDBOX</span>
+        <div class="wallet-actions">
+          <button type="button">+ ทดลองเติมเครดิต</button>
+          <button type="button">ดู Ledger</button>
+        </div>
+      </article>
+
+      <div class="announcement"><span>ประกาศ</span> รอบ Quick Lab ถัดไปปิดรับใน 08:42 นาที</div>
+
+      <div class="section-heading">
+        <div><p class="eyebrow">QUICK ACCESS</p><h3>เริ่มทดลอง</h3></div>
+        <button class="text-button" data-go="rounds">ดูทั้งหมด</button>
+      </div>
+      <div class="feature-grid">
+        <button class="feature-card" data-go="rounds"><span>◫</span><b>เลือกงวด</b><small>4 งวดกำลังเปิด</small></button>
+        <button class="feature-card"><span>⌁</span><b>รายการของฉัน</b><small>ตรวจสถานะย้อนหลัง</small></button>
+        <button class="feature-card"><span>◇</span><b>ผลจำลอง</b><small>ผล Mock ล่าสุด</small></button>
+        <button class="feature-card"><span>≡</span><b>กระเป๋าเครดิต</b><small>Ledger ตรวจสอบได้</small></button>
+      </div>
+
+      <article class="highlight-card">
+        <div><p class="eyebrow">FEATURED LAB</p><h3>Quick Round 15 นาที</h3><p>เรียนรู้ Round → Entry → Receipt แบบครบวงจร</p></div>
+        <button class="primary-button compact" data-go="rounds">เริ่มทดลอง</button>
+      </article>
+    </section>
+
+    <section class="screen" data-screen="rounds">
+      <header class="app-header">
+        <button class="icon-button" data-go="dashboard" aria-label="กลับ">‹</button>
+        <div class="grow"><p class="eyebrow">ROUND CATALOG</p><h2>เลือกงวดจำลอง</h2></div>
+        <button class="icon-button" aria-label="ค้นหา">⌕</button>
+      </header>
+      <div class="filter-row" role="tablist">
+        <button class="filter active">ทั้งหมด</button><button class="filter">รอบด่วน</button><button class="filter">รายวัน</button>
+      </div>
+      <div class="round-list">
+        <article class="round-card">
+          <div class="round-icon">15</div>
+          <div class="grow"><div class="card-title-row"><h3>Quick Lab #042</h3><span class="status open">เปิดรับ</span></div><p>ปิดรับ 14:45 น. • Mock draw</p><div class="countdown" data-seconds="522">08:42</div></div>
+          <button class="round-arrow" data-go="entry" aria-label="เลือกงวด">›</button>
+        </article>
+        <article class="round-card">
+          <div class="round-icon gold">TH</div>
+          <div class="grow"><div class="card-title-row"><h3>Thai Number Lab</h3><span class="status soon">ใกล้ปิด</span></div><p>ปิดรับ 15:30 น. • Daily simulation</p><div class="countdown">26:18</div></div>
+          <button class="round-arrow" data-go="entry" aria-label="เลือกงวด">›</button>
+        </article>
+        <article class="round-card muted-card">
+          <div class="round-icon">NX</div>
+          <div class="grow"><div class="card-title-row"><h3>Night Experiment</h3><span class="status closed">ยังไม่เปิด</span></div><p>เปิดรับ 18:00 น.</p></div>
+          <button class="round-arrow" disabled aria-label="ยังไม่เปิด">›</button>
+        </article>
+      </div>
+      <div class="info-panel"><b>เวลาจากระบบกลาง</b><p>Countdown ใน Prototype เป็นข้อมูลจำลอง สำหรับระบบจริงจะตรวจเวลาปิดรับซ้ำที่ Server</p></div>
+    </section>
+
+    <section class="screen" data-screen="entry">
+      <header class="app-header">
+        <button class="icon-button" data-go="rounds" aria-label="กลับ">‹</button>
+        <div class="grow"><p class="eyebrow">QUICK LAB #042</p><h2>เลือกตัวเลข</h2></div>
+        <div class="timer-chip"><small>ปิดใน</small><b data-countdown-copy>08:42</b></div>
+      </header>
+
+      <div class="mode-switch"><button class="active" data-mode="manual">กดเลขเอง</button><button data-mode="grid">เลือกจากแผง</button></div>
+      <div class="entry-tabs"><button class="active" data-digits="3">3 ตัว</button><button data-digits="2">2 ตัว</button><button data-digits="1">เลขวิ่ง</button></div>
+
+      <div class="entry-panel glass-card">
+        <div class="entry-type-row">
+          <button class="type-chip active">ตรง <span>x750</span></button>
+          <button class="type-chip">สลับ <span>x150</span></button>
+        </div>
+        <div class="manual-entry" id="manual-entry">
+          <p class="eyebrow">กรอกเลข 3 หลัก</p>
+          <div class="digit-display" id="digit-display"><span>—</span><span>—</span><span>—</span></div>
+          <div class="keypad" id="keypad"></div>
+          <button class="secondary-button" id="add-number" disabled>เพิ่มเลขในรายการ</button>
+        </div>
+        <div class="number-grid-wrap hidden" id="number-grid-wrap">
+          <input id="number-search" inputmode="numeric" placeholder="ค้นหาเลข เช่น 125">
+          <div class="number-grid" id="number-grid"></div>
+        </div>
+      </div>
+
+      <div class="sticky-cart">
+        <div><small>เลือกแล้ว</small><strong><span id="selected-count">0</span> เลข</strong></div>
+        <div><small>ยอดรวม</small><strong id="total-credit">0 เครดิต</strong></div>
+        <button class="primary-button compact" id="confirm-entry" disabled>ตรวจสรุป</button>
+      </div>
+    </section>
+
+    <section class="screen receipt-screen" data-screen="receipt">
+      <div class="receipt-success">✓</div>
+      <p class="eyebrow centered">ENTRY CONFIRMED</p>
+      <h2>สร้างรายการจำลองแล้ว</h2>
+      <p class="muted centered">ระบบบันทึก Entry และ Ledger debit สำหรับการสาธิต</p>
+      <article class="receipt-card">
+        <div class="receipt-head"><div><small>เลขที่ใบสรุป</small><b id="receipt-id">NL-260729-0042</b></div><span class="status open">ยืนยันแล้ว</span></div>
+        <div class="receipt-divider"></div>
+        <dl>
+          <div><dt>งวด</dt><dd>Quick Lab #042</dd></div>
+          <div><dt>รายการ</dt><dd id="receipt-numbers">—</dd></div>
+          <div><dt>เครดิตที่ใช้</dt><dd id="receipt-total">0 เครดิต</dd></div>
+          <div><dt>คงเหลือ</dt><dd id="receipt-balance">10,000 เครดิต</dd></div>
+        </dl>
+        <div class="verification-code">VERIFY • 7A42-D3MO-91</div>
+      </article>
+      <div class="info-panel"><b>ตรวจสอบย้อนหลังได้</b><p>ในระบบจริง Receipt จะอ้างอิง Server response, idempotency key และ Ledger transaction เดียวกัน</p></div>
+      <button class="primary-button" data-go="dashboard">กลับหน้าแรก</button>
+      <button class="secondary-button" data-go="rounds">ทดลองงวดอื่น</button>
+    </section>
+
+    <nav class="bottom-nav hidden" id="bottom-nav" aria-label="เมนูหลัก">
+      <button data-go="dashboard"><span>⌂</span>หน้าแรก</button>
+      <button data-go="rounds"><span>◫</span>เลือกงวด</button>
+      <button><span>⌁</span>รายการ</button>
+      <button><span>◇</span>ผล</button>
+      <button><span>○</span>บัญชี</button>
+    </nav>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
