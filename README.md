@@ -1,4 +1,22 @@
-# LOTTOVIP
+# LOTTOVIP Simulator
+
+เว็บแอปจำลองการเลือกตัวเลขสำหรับศึกษา UI, ฐานข้อมูล, RLS และธุรกรรมแบบอะตอมมิก
+ระบบใช้เครดิตทดลองที่ไม่มีมูลค่า ไม่รองรับการฝาก ถอน หรือแลกเงินจริง
+
+## สถานะล่าสุด
+
+- Phase 1: บัญชีสมาชิกและโครงสร้างพื้นฐาน
+- Phase 2: Dashboard และเครดิตทดลอง
+- Phase 3: สร้างโพยแบบร่าง
+- Phase 4: ศูนย์รวมหมวดหวยจำลอง, ยืนยันโพย, ตัดเครดิตแบบ Transaction, ประวัติโพย
+
+## ตรวจสอบโค้ด
+
+```bash
+node --check auth-page.js
+node --check entry-builder.js
+node tests/phase4-static.mjs
+```
 
 LOTTOVIP is a mobile-first member platform currently under phased development.
 

@@ -10,6 +10,8 @@
   const list = document.querySelector("#entry-items");
   const total = document.querySelector("#entry-total");
   const count = document.querySelector("#entry-count");
+  const submitButton = document.querySelector("#submit-entry");
+  const submitTotal = document.querySelector("#submit-total");
 
   const money = new Intl.NumberFormat("th-TH", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({
@@ -34,8 +36,11 @@
   }
 
   function renderItems() {
+    const sum = state.items.reduce((current, item) => current + Number(item.amount), 0);
     count.textContent = String(state.items.length);
-    total.textContent = money.format(state.items.reduce((sum, item) => sum + Number(item.amount), 0));
+    total.textContent = money.format(sum);
+    submitTotal.textContent = money.format(sum);
+    submitButton.disabled = !state.items.length;
     if (!state.items.length) {
       list.innerHTML = '<p class="muted empty-state">ยังไม่มีตัวเลขในรายการนี้</p>';
       return;
@@ -81,6 +86,9 @@
     state.entryId = null;
     state.items = [];
     document.querySelector("#entry-round-title").textContent = round.title;
+    document.querySelector("#entry-round-code").textContent = round.code;
+    document.querySelector("#entry-close-time").textContent = `ปิด ${new Intl.DateTimeFormat("th-TH",{dateStyle:"medium",timeStyle:"short",timeZone:"Asia/Bangkok"}).format(new Date(round.closes_at))}`;
+    document.querySelector("#entry-category-icon").textContent = window.LOTTOVIP_DASHBOARD?.categoryMeta?.[round.category]?.icon || "🎯";
     dashboard.classList.remove("active");
     screen.classList.add("active");
     setStatus("กำลังโหลดกติกาของงวด...");
@@ -140,6 +148,10 @@
   });
 
   typeSelect.addEventListener("change", syncInputs);
+  document.querySelectorAll("[data-amount]").forEach((button)=>button.addEventListener("click",()=>{
+    amountInput.value=button.dataset.amount;
+    document.querySelectorAll("[data-amount]").forEach((item)=>item.classList.toggle("active",item===button));
+  }));
   numberInput.addEventListener("input", () => {
     numberInput.value = numberInput.value.replace(/\D/g, "").slice(0, currentRule()?.digits || 3);
   });
@@ -147,7 +159,31 @@
     screen.classList.remove("active");
     dashboard.classList.add("active");
   });
+  submitButton.addEventListener("click",async()=>{
+    if(!state.entryId||!state.items.length)return;
+    const expectedTotal=state.items.reduce((sum,item)=>sum+Number(item.amount),0);
+    if(!window.confirm(`ยืนยันโพยจำลอง ${state.items.length} รายการ รวม ${money.format(expectedTotal)} เครดิต?`))return;
+    submitButton.disabled=true;
+    setStatus("กำลังยืนยันและตัดเครดิตจำลอง...");
+    try{
+      const {data,error}=await client.rpc("submit_simulation_entry",{p_entry_id:state.entryId});
+      if(error)throw error;
+      const result=data?.[0];
+      setStatus(`ยืนยันแล้ว เลขอ้างอิง ${result?.reference_code||"-"}`);
+      state.entryId=null;state.items=[];renderItems();
+      await window.LOTTOVIP_DASHBOARD?.refresh();
+      setTimeout(()=>{screen.classList.remove("active");dashboard.classList.add("active");},900);
+    }catch(error){
+      const messages={
+        ENTRY_EMPTY:"โพยไม่มีรายการ",ROUND_NOT_OPEN:"งวดนี้ปิดรับแล้ว",
+        INSUFFICIENT_SIMULATION_CREDITS:"เครดิตทดลองไม่เพียงพอ",
+        ENTRY_NOT_SUBMITTABLE:"โพยนี้ไม่สามารถยืนยันได้"
+      };
+      const code=Object.keys(messages).find((key)=>String(error.message).includes(key));
+      setStatus(messages[code]||error.message,true);
+      submitButton.disabled=false;
+    }
+  });
 
   window.LOTTOVIP_ENTRY_BUILDER = { open };
 })();
-
