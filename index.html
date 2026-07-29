@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#15171c">
-  <meta name="description" content="LOTTOVIP member dashboard and draft entry builder">
-  <title>LOTTOVIP - Entry Builder</title>
+  <meta name="description" content="LOTTOVIP ระบบจำลองการเลือกเลขด้วยเครดิตทดลอง">
+  <title>LOTTOVIP Simulator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,26 +30,31 @@
     </section>
     <section class="screen dashboard-screen" id="dashboard-screen">
       <header class="app-header"><div class="avatar" id="member-avatar">LV</div><div class="grow"><p class="eyebrow">บัญชีสมาชิก</p><h2 id="member-name">กำลังโหลด...</h2><p class="muted member-meta"><span id="member-role">สมาชิก</span> · <span id="account-status">ใช้งานปกติ</span></p></div><button class="text-button" id="sign-out" type="button">ออกจากระบบ</button></header>
-      <section class="wallet-card" aria-labelledby="wallet-title"><div><p id="wallet-title">ยอดคงเหลือ</p><strong id="wallet-balance">—</strong></div><span class="secure-chip">บัญชีหลัก</span><p class="wallet-update" id="wallet-updated">กำลังตรวจสอบข้อมูล</p></section>
+      <div class="simulator-banner"><b>โหมดจำลอง</b><span>ใช้เครดิตทดลอง ไม่มีการฝาก ถอน หรือแลกเป็นเงินจริง</span></div>
+      <section class="wallet-card" aria-labelledby="wallet-title"><div><p id="wallet-title">เครดิตทดลองคงเหลือ</p><strong id="wallet-balance">—</strong></div><span class="secure-chip">SIM CREDIT</span><p class="wallet-update" id="wallet-updated">กำลังตรวจสอบข้อมูล</p></section>
       <div class="dashboard-grid"><section class="glass-card metric-card"><p class="muted">งวดที่เปิดอยู่</p><strong id="open-round-count">—</strong></section><section class="glass-card metric-card"><p class="muted">รายการเคลื่อนไหว</p><strong id="ledger-count">—</strong></section></div>
-      <section class="dashboard-section"><div class="section-heading"><div><p class="eyebrow">Current rounds</p><h3>งวดที่เปิดอยู่</h3></div><span class="live-dot">LIVE</span></div><div class="round-list" id="round-list"><p class="muted">กำลังโหลดรายการงวด...</p></div></section>
+      <section class="dashboard-section"><div class="section-heading"><div><p class="eyebrow">Lottery simulator</p><h3>เลือกประเภทหวยจำลอง</h3></div><span class="live-dot">LIVE</span></div><nav class="category-tabs" id="category-tabs" aria-label="หมวดหวย"></nav><div class="round-list" id="round-list"><p class="muted">กำลังโหลดรายการงวด...</p></div></section>
+      <section class="dashboard-section"><div class="section-heading"><div><p class="eyebrow">My entries</p><h3>โพยล่าสุด</h3></div><button class="text-button" id="refresh-entries" type="button">รีเฟรช</button></div><div class="recent-entries" id="recent-entries"><p class="muted">กำลังโหลดโพย...</p></div></section>
       <section class="dashboard-section"><div class="section-heading"><div><p class="eyebrow">Wallet history</p><h3>ประวัติยอดล่าสุด</h3></div></div><div class="ledger-list" id="ledger-list"><p class="muted">กำลังโหลดประวัติ...</p></div></section>
       <p class="dashboard-status muted centered" id="dashboard-status" aria-live="polite"></p>
     </section>
     <section class="screen entry-screen" id="entry-screen">
       <header class="app-header"><button class="text-button" id="entry-back" type="button">← กลับ</button><div class="grow"><p class="eyebrow">Draft entry</p><h2 id="entry-round-title">เลือกตัวเลข</h2></div></header>
+      <div class="round-hero"><span id="entry-category-icon">🎯</span><div><small id="entry-round-code">SIM</small><b id="entry-close-time">กำลังโหลดเวลาปิด</b></div></div>
       <section class="glass-card entry-card">
         <form id="entry-form">
           <label>ประเภท<select id="entry-type" required></select></label>
           <label>ตัวเลข<input id="entry-number" inputmode="numeric" pattern="[0-9]*" autocomplete="off" required></label>
           <label>ยอดต่อรายการ<input id="entry-amount" type="number" inputmode="decimal" step="1" value="10" required></label>
-          <button class="primary-button" id="add-entry" type="submit">เพิ่มในแบบร่าง</button>
+          <div class="quick-amounts" aria-label="เลือกยอดด่วน"><button type="button" data-amount="5">5</button><button type="button" data-amount="10">10</button><button type="button" data-amount="20">20</button><button type="button" data-amount="50">50</button></div>
+          <button class="primary-button" id="add-entry" type="submit">เพิ่มลงโพย</button>
         </form>
         <p class="muted centered entry-status" id="entry-status" aria-live="polite"></p>
       </section>
       <div class="entry-summary"><span><b id="entry-count">0</b> รายการ</span><span>รวม <b id="entry-total">0.00</b></span></div>
       <div class="entry-items" id="entry-items"><p class="muted empty-state">ยังไม่มีตัวเลขในรายการนี้</p></div>
-      <p class="legal-note">แบบร่างเท่านั้น ยังไม่มีการหักยอดหรือยืนยันรายการ</p>
+      <section class="submit-panel glass-card"><div><small>ยอดใช้เครดิตจำลอง</small><strong id="submit-total">0.00</strong></div><button class="primary-button" id="submit-entry" type="button" disabled>ยืนยันโพยจำลอง</button></section>
+      <p class="legal-note">ระบบนี้เป็นโปรแกรมจำลองเพื่อศึกษา เครดิตไม่มีมูลค่าและถอนไม่ได้</p>
     </section>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
