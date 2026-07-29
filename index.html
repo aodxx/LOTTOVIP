@@ -4,26 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#15171c">
-  <meta name="description" content="LOTTOVIP simulation platform">
-  <title>LOTTOVIP — Member Foundation</title>
+  <meta name="description" content="LOTTOVIP member dashboard">
+  <title>LOTTOVIP — Member Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./phase0/styles.css">
+  <link rel="stylesheet" href="./dashboard.css">
 </head>
 <body>
   <div class="ambient ambient-one"></div>
   <div class="ambient ambient-two"></div>
   <main class="app-shell">
-    <section class="screen login-screen active">
+    <section class="screen login-screen active" id="auth-screen">
       <div class="brand-lockup">
         <div class="brand-mark" aria-hidden="true">LV</div>
-        <p class="eyebrow">Supabase Foundation</p>
+        <p class="eyebrow">Member access</p>
         <h1>LOTTO<span>VIP</span></h1>
-        <p class="muted">ระบบสมาชิกและเครดิตสำหรับการจำลองเท่านั้น</p>
+        <p class="muted">บัญชีสมาชิกหลักสำหรับเข้าใช้งานระบบ</p>
       </div>
       <form class="login-card glass-card" id="auth-form">
-        <div class="sandbox-badge">SIMULATION ONLY</div>
         <label>ชื่อที่ใช้แสดง
           <input id="display-name" autocomplete="name" placeholder="ชื่อของคุณ">
         </label>
@@ -35,11 +35,57 @@
         </label>
         <button class="primary-button" type="submit">เข้าสู่ระบบ</button>
         <button class="secondary-button" id="sign-up" type="button">สมัครสมาชิก</button>
-        <button class="text-button hidden" id="sign-out" type="button">ออกจากระบบ</button>
-        <p class="muted centered" id="auth-status" aria-live="polite"></p>
-        <a class="secondary-button hidden" id="open-app" href="./phase0/" style="display:grid;place-items:center;text-decoration:none">เปิด Prototype</a>
+        <p class="muted centered" id="auth-status" aria-live="polite">พร้อมเข้าสู่ระบบ</p>
       </form>
-      <p class="legal-note">เครดิตจำลองไม่มีมูลค่าเงินสดและไม่สามารถถอนหรือแลกเปลี่ยนได้</p>
+    </section>
+
+    <section class="screen dashboard-screen" id="dashboard-screen">
+      <header class="app-header">
+        <div class="avatar" id="member-avatar">LV</div>
+        <div class="grow">
+          <p class="eyebrow">บัญชีสมาชิก</p>
+          <h2 id="member-name">กำลังโหลด...</h2>
+          <p class="muted member-meta"><span id="member-role">สมาชิก</span> · <span id="account-status">ใช้งานปกติ</span></p>
+        </div>
+        <button class="text-button" id="sign-out" type="button">ออกจากระบบ</button>
+      </header>
+
+      <section class="wallet-card" aria-labelledby="wallet-title">
+        <div>
+          <p id="wallet-title">ยอดคงเหลือ</p>
+          <strong id="wallet-balance">—</strong>
+        </div>
+        <span class="secure-chip">บัญชีหลัก</span>
+        <p class="wallet-update" id="wallet-updated">กำลังตรวจสอบข้อมูล</p>
+      </section>
+
+      <div class="dashboard-grid">
+        <section class="glass-card metric-card">
+          <p class="muted">งวดที่เปิดอยู่</p>
+          <strong id="open-round-count">—</strong>
+        </section>
+        <section class="glass-card metric-card">
+          <p class="muted">รายการเคลื่อนไหว</p>
+          <strong id="ledger-count">—</strong>
+        </section>
+      </div>
+
+      <section class="dashboard-section">
+        <div class="section-heading">
+          <div><p class="eyebrow">Current rounds</p><h3>งวดที่เปิดอยู่</h3></div>
+          <span class="live-dot">LIVE</span>
+        </div>
+        <div class="round-list" id="round-list"><p class="muted">กำลังโหลดรายการงวด...</p></div>
+      </section>
+
+      <section class="dashboard-section">
+        <div class="section-heading">
+          <div><p class="eyebrow">Wallet history</p><h3>ประวัติยอดล่าสุด</h3></div>
+        </div>
+        <div class="ledger-list" id="ledger-list"><p class="muted">กำลังโหลดประวัติ...</p></div>
+      </section>
+
+      <p class="dashboard-status muted centered" id="dashboard-status" aria-live="polite"></p>
     </section>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
