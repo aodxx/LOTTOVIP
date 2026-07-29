@@ -8,14 +8,14 @@
 - Phase 1: บัญชีสมาชิกและโครงสร้างพื้นฐาน
 - Phase 2: Dashboard และเครดิตทดลอง
 - Phase 3: สร้างโพยแบบร่าง
-- Phase 4: ศูนย์รวมหมวดหวยจำลอง, ยืนยันโพย, ตัดเครดิตแบบ Transaction, ประวัติโพย
+- Phase 4: ศูนย์รวมหมวดหวยจำลอง, ยืนยันโพย, ตัดเครดิตแบบ Transaction, ประวัติโพย\n- Phase 5: ผลรางวัลจำลอง, ตรวจผู้ชนะ, จ่ายเครดิตแบบ idempotent และผลย้อนหลัง
 
 ## ตรวจสอบโค้ด
 
 ```bash
 node --check auth-page.js
 node --check entry-builder.js
-node tests/phase4-static.mjs
+node tests/phase4-static.mjs\nnode tests/phase5-static.mjs
 ```
 
 LOTTOVIP is a mobile-first member platform currently under phased development.
