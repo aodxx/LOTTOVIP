@@ -78,8 +78,8 @@ function renderRounds(rounds){
 function renderRecentEntries(entries){
   const list=document.querySelector("#recent-entries");
   if(!entries.length){list.innerHTML='<p class="muted empty-state">ยังไม่มีโพยของคุณ</p>';return;}
-  const statusText={draft:"แบบร่าง",submitted:"ยืนยันแล้ว",cancelled:"ยกเลิก"};
-  list.innerHTML=entries.map((entry)=>`<article class="recent-entry"><div><b>${escapeHtml(entry.rounds?.title||"ไม่ทราบงวด")}</b><small>${escapeHtml(entry.reference_code||"ยังไม่มีเลขอ้างอิง")} · ${dateTime.format(new Date(entry.updated_at))}</small></div><div><strong>${money.format(Number(entry.total_amount))}</strong><span class="entry-state ${escapeHtml(entry.status)}">${statusText[entry.status]||entry.status}</span></div></article>`).join("");
+  const statusText={draft:"แบบร่าง",submitted:"รอตรวจผล",settled:"ตรวจผลแล้ว",cancelled:"ยกเลิก"};
+  list.innerHTML=entries.map((entry)=>`<article class="recent-entry"><div><b>${escapeHtml(entry.rounds?.title||"ไม่ทราบงวด")}</b><small>${escapeHtml(entry.reference_code||"ยังไม่มีเลขอ้างอิง")} · ${dateTime.format(new Date(entry.updated_at))}</small></div><div><strong>${money.format(Number(entry.total_amount))}</strong><span class="entry-state ${escapeHtml(entry.status)}">${statusText[entry.status]||entry.status}</span>${entry.status==="settled"?`<span class="prize-amount">${Number(entry.prize_amount)>0?`ถูกรางวัล +${money.format(Number(entry.prize_amount))}`:"ไม่ถูกรางวัล"}</span>`:""}</div></article>`).join("");
 }
 function renderLedger(entries){
   const list=document.querySelector("#ledger-list"); document.querySelector("#ledger-count").textContent=String(entries.length);
@@ -93,7 +93,7 @@ async function loadDashboard(user){
     client.from("wallets").select("balance,updated_at").eq("user_id",user.id).single(),
     client.from("rounds").select("id,code,title,category,status,closes_at").eq("status","open").order("closes_at"),
     client.from("wallet_ledger").select("id,entry_type,amount,balance_after,description,created_at").eq("user_id",user.id).order("created_at",{ascending:false}).limit(10),
-    client.from("entries").select("id,status,total_amount,reference_code,updated_at,rounds(title,category)").eq("user_id",user.id).order("updated_at",{ascending:false}).limit(8)
+    client.from("entries").select("id,status,total_amount,prize_amount,reference_code,updated_at,settled_at,rounds(title,category)").eq("user_id",user.id).order("updated_at",{ascending:false}).limit(8)
   ]);
   const failure=results.find((result)=>result.error);
   if(failure){dashboardStatus.textContent=`โหลดข้อมูลไม่สำเร็จ: ${failure.error.message}`;return;}
@@ -103,7 +103,7 @@ async function loadDashboard(user){
   document.querySelector("#wallet-balance").textContent=money.format(Number(wallet.balance)); document.querySelector("#wallet-updated").textContent=`อัปเดตล่าสุด ${dateTime.format(new Date(wallet.updated_at))}`;
   dashboardRounds=roundsResult.data||[];
   renderCategoryTabs(dashboardRounds); renderRounds(dashboardRounds); renderRecentEntries(entriesResult.data||[]);
-  renderLedger(ledgerResult.data||[]); dashboardStatus.textContent="";
+  renderLedger(ledgerResult.data||[]); dashboardStatus.textContent=""; window.dispatchEvent(new CustomEvent("lottovip:dashboard-loaded"));
 }
 async function refreshDashboard(){
   const {data}=await window.LOTTOVIP_AUTH.getSession();
